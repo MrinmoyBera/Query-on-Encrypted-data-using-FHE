@@ -1,0 +1,110 @@
+// For connecting to the server
+let mut stream = TcpStream::connect("127.0.0.1:7878").expect("Cannot connect to server");
+
+//---------------------------where query-----------------------------
+/*
+    let request = QueryRequest {
+            query_type: "where_query".to_string(),
+            column_name: "salary".to_string(),
+            operation: "greater_than".to_string(),
+            ref_val: 6,
+        };
+
+        // Convert to JSON and send
+        let json_request = serde_json::to_string(&request).unwrap();
+        stream.write_all(json_request.as_bytes()).unwrap();
+
+        // Read response
+        let mut buffer = Vec::new();
+        stream.read_to_end(&mut buffer).unwrap();
+
+        let ciphertext_vec: Vec<FheBool> = bincode::deserialize(&buffer).unwrap();
+        let decrypted_bools: Vec<bool> = ciphertext_vec.iter()
+            .map(|ct| decryption::decrypt_bool_ciphertext(client_key_path, ct))
+            .collect();
+
+        println!("Decrypted booleans: {:?}", decrypted_bools);
+*/   
+
+
+//----------------------------------Average of a column-----------------------------
+/*
+    let request = QueryRequest {
+            query_type: "Avg".to_string(),
+            column_name: "salary".to_string(),
+            operation: None,
+            ref_val: None,
+        };
+
+    // Convert to JSON and send
+    let json_request = serde_json::to_string(&request).unwrap();
+    stream.write_all(json_request.as_bytes()).unwrap();
+
+    // Read response
+    let mut buffer = Vec::new();
+    stream.read_to_end(&mut buffer).unwrap();
+
+    // Deserialize encrypted result
+    let (encrypted_value, count): (FheInt8, usize) = bincode::deserialize(&buffer).unwrap();
+
+    // Decrypt the encrypted_value using your client key
+    let decrypted_opt = decryption::decrypt_ciphertext(client_key_path, &encrypted_value);
+
+    match decrypted_opt {
+        Some(decrypted_sum) => {
+            let average = decrypted_sum as f64 / count as f64;
+            println!("Decrypted sum: {}", decrypted_sum);
+            println!("Average: {:.2}", average);
+        }
+        None => {
+            println!("Failed to decrypt received data.");
+        }
+    }
+*/
+
+
+//-------------------------------max/ min query------------------------------------
+/*
+    let request = QueryRequest {
+            query_type: "max".to_string(),
+            column_name: "salary".to_string(),
+            operation: None,
+            ref_val: None,
+        };
+
+    // Convert to JSON and send
+    let json_request = serde_json::to_string(&request).unwrap();
+    stream.write_all(json_request.as_bytes()).unwrap();
+
+    // Read response
+    let mut buffer = Vec::new();
+    stream.read_to_end(&mut buffer).unwrap();
+
+    // Deserialize encrypted result
+    let encrypted_value: FheInt8 = bincode::deserialize(&buffer).unwrap();
+
+    // Decrypt the encrypted_value using your client key
+    let decrypted_opt = decryption::decrypt_ciphertext(client_key_path, &encrypted_value);
+
+    match decrypted_opt {
+        Some(decrypted_max) => {
+            println!("Decrypted max: {}", decrypted_max);
+        }
+        None => {
+            println!("Failed to decrypt received data.");
+        }
+    }
+*/
+
+//-------------------------------Ascending/Descending--------------------------------
+/*
+    // Read response
+        let mut buffer = Vec::new();
+        stream.read_to_end(&mut buffer).unwrap();
+
+        let ciphertext_vec: Vec<FheInt8> = bincode::deserialize(&buffer).unwrap();
+        let decrypted_values: Vec<i8> = ciphertext_vec
+        .iter()
+        .map(|ct| decryption::decrypt_ciphertext(client_key_path, ct).expect("Decryption failed"))
+        .collect();
+*/        
